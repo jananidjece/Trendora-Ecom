@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { addTocart } from '../redux/cartSlice'
 import { toast } from 'react-toastify'
+import { getFullURL } from '../axiosInstance'
 
 
 const ProductDetail = () => {
@@ -31,7 +32,7 @@ const ProductDetail = () => {
       <div className='flex flex-col md:flex-row gap-x-16'>
         {/* {product img} */}
         <div className='md:w-1/2 py-2 shadow-md md:px-8 h-96 flex justify-center'>
-          <img src={product.image} alt="img" className='h-full' />
+          <img src={getFullURL(product.image)} alt="img" className='h-full' />
 
         </div>
         {/* product info */}

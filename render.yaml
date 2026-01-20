@@ -3,6 +3,7 @@ services:
   - type: web
     name: ecommerce-backend
     env: python
+    rootDir: backend
     buildCommand: ./build.sh
     startCommand: gunicorn ecommerce_backend.wsgi:application
     envVars:
@@ -15,12 +16,13 @@ services:
       - key: DEBUG
         value: "False"
       - key: ALLOWED_HOSTS
-        value: "ecommerce-backend.onrender.com" # Replace with your actual backend URL after deployment
+        value: "*" # Set this to your actual URL once deployed
 
   # Frontend
   - type: web
     name: ecommerce-frontend
     env: static
+    rootDir: frontend
     buildCommand: npm install && npm run build
     publishPath: ./dist
     envVars:

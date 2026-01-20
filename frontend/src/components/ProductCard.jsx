@@ -4,6 +4,7 @@ import { addTocart } from "../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { getFullURL } from "../axiosInstance";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const ProductCard = ({ product }) => {
         {/* Product Image */}
         <div className="relative mb-4 flex justify-center items-center h-48 bg-gray-50 rounded-2xl overflow-hidden group-hover:bg-white transition-colors">
           <img
-            src={product.image}
+            src={getFullURL(product.image)}
             alt={product.name}
             className="w-full h-full object-contain p-2 mix-blend-multiply"
           />
