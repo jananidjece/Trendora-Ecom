@@ -10,9 +10,8 @@ django.setup()
 from products.models import Product
 
 def seed_products():
-    # Source directory for images (Frontend assets)
-    # Adjust path relative to where this script is run (backend/)
-    frontend_assets_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'frontend', 'src', 'assets', 'images')
+    # Source directory for images (Local within backend for deployment)
+    frontend_assets_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'seed_images')
     
     products_data = [
         {
