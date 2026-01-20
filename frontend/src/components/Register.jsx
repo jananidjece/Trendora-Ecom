@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { login } from '../redux/userSlice'
 
 const Register = ({ openLogin, setIsModelOpen }) => {
-    const [name, setName] = useState('')
+    const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
@@ -14,7 +14,7 @@ const Register = ({ openLogin, setIsModelOpen }) => {
         e.preventDefault()
         try {
             const { data } = await axiosInstance.post('/api/users/register/', {
-                username: name,
+                username: username,
                 email: email,
                 password: password
             })
@@ -31,12 +31,12 @@ const Register = ({ openLogin, setIsModelOpen }) => {
             {error && <div className="text-red-500 mb-2">{error}</div>}
             <form onSubmit={handleSubmit}>
                 <div className='mb-4'>
-                    <label className='block text-gray-700'>Name</label>
+                    <label className='block text-gray-700'>Username</label>
                     <input
                         type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder='Enter Name'
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder='Enter Username'
                         className='w-full px-3 py-2 border'
                         required
                     />

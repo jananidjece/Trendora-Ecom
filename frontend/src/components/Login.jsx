@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { login } from '../redux/userSlice'
 
 const Login = ({ openSignUp, setIsModelOpen }) => {
-    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
     const [error, setError] = useState('')
@@ -15,7 +15,7 @@ const Login = ({ openSignUp, setIsModelOpen }) => {
         e.preventDefault()
         try {
             const { data } = await axiosInstance.post('/api/users/login/', {
-                username: email,
+                username: username,
                 password: password
             })
             dispatch(login(data))
@@ -26,7 +26,7 @@ const Login = ({ openSignUp, setIsModelOpen }) => {
             }
 
         } catch (err) {
-            setError('Invalid email or password')
+            setError('Invalid username or password')
         }
     }
 
@@ -36,12 +36,12 @@ const Login = ({ openSignUp, setIsModelOpen }) => {
             {error && <div className="text-red-500 mb-2">{error}</div>}
             <form onSubmit={handleSubmit}>
                 <div className='mb-4'>
-                    <label className='block text-gray-700'>Email</label>
+                    <label className='block text-gray-700'>Username</label>
                     <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder='Enter Email'
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder='Enter Username'
                         className='w-full px-3 py-2 border'
                         required
                     />
