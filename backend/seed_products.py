@@ -12,6 +12,11 @@ from products.models import Product
 def seed_products():
     # Source directory for images (Local within backend for deployment)
     frontend_assets_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'seed_images')
+    print(f"DEBUG: Looking for images in: {frontend_assets_dir}")
+    if os.path.exists(frontend_assets_dir):
+        print(f"DEBUG: Directory exists. Files: {os.listdir(frontend_assets_dir)}")
+    else:
+        print(f"DEBUG: Directory NOT FOUND!")
     
     products_data = [
         {
@@ -105,7 +110,7 @@ def seed_products():
         except Exception as e:
             print(f"Error creating product {item['name']}: {e}")
 
-    print("Seeding complete.")
+    print(f"Seeding complete. Total products in DB: {Product.objects.count()}")
 
 if __name__ == '__main__':
     seed_products()
