@@ -9,7 +9,7 @@ django.setup()
 User = get_user_model()
 
 def create_superuser():
-    username = 'admin'
+    username = 'admin@example.com'
     email = 'admin@example.com'
     password = 'password123'
     
