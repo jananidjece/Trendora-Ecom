@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axiosInstance from '../../axiosInstance'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -23,7 +23,7 @@ const UserEdit = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const { data } = await axios.get(`http://127.0.0.1:8000/api/users/${id}/`, config)
+                const { data } = await axiosInstance.get(`/api/users/${id}/`, config)
                 setName(data.username)
                 setEmail(data.email)
                 setIsAdmin(data.isAdmin)
@@ -37,7 +37,7 @@ const UserEdit = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            await axios.put(`http://127.0.0.1:8000/api/users/update/${id}/`, {
+            await axiosInstance.put(`/api/users/update/${id}/`, {
                 username: name, email, isAdmin
             }, config)
             toast.success('User updated successfully')

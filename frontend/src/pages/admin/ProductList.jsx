@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axiosInstance from '../../axiosInstance'
 import { useSelector } from 'react-redux'
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
@@ -18,7 +18,7 @@ const ProductList = () => {
     }
 
     const fetchProducts = async () => {
-        const { data } = await axios.get('http://127.0.0.1:8000/api/products/')
+        const { data } = await axiosInstance.get('/api/products/')
         setProducts(data)
     }
 
@@ -29,7 +29,7 @@ const ProductList = () => {
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this product?')) {
             try {
-                await axios.delete(`http://127.0.0.1:8000/api/products/delete/${id}/`, config)
+                await axiosInstance.delete(`/api/products/delete/${id}/`, config)
                 fetchProducts()
                 toast.success('Product deleted successfully')
             } catch (error) {
@@ -40,7 +40,7 @@ const ProductList = () => {
 
     const handleCreate = async () => {
         try {
-            const { data } = await axios.post('http://127.0.0.1:8000/api/products/create/', {}, config)
+            const { data } = await axiosInstance.post('/api/products/create/', {}, config)
             toast.success('Product created successfully')
             navigate(`/admin/product/${data.id}/edit`)
         } catch (error) {

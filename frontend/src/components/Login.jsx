@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../redux/userSlice'
@@ -14,7 +14,7 @@ const Login = ({ openSignUp, setIsModelOpen }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const { data } = await axios.post('http://127.0.0.1:8000/api/users/login/', {
+            const { data } = await axiosInstance.post('/api/users/login/', {
                 username: email,
                 password: password
             })

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../redux/userSlice'
@@ -13,7 +13,7 @@ const Register = ({ openLogin, setIsModelOpen }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const { data } = await axios.post('http://127.0.0.1:8000/api/users/register/', {
+            const { data } = await axiosInstance.post('/api/users/register/', {
                 username: name,
                 email: email,
                 password: password

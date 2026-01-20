@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axiosInstance from '../../axiosInstance'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -27,7 +27,7 @@ const ProductEdit = () => {
 
     useEffect(() => {
         const fetchProduct = async () => {
-            const { data } = await axios.get(`http://127.0.0.1:8000/api/products/${id}/`)
+            const { data } = await axiosInstance.get(`/api/products/${id}/`)
             setName(data.name)
             setPrice(data.price)
             setImage(data.image)
@@ -53,7 +53,7 @@ const ProductEdit = () => {
                     // Authorization: `Bearer ${userInfo.token}`, // If you adding auth to upload view
                 }
             }
-            await axios.post('http://127.0.0.1:8000/api/products/upload/', formData, config)
+            await axiosInstance.post('/api/products/upload/', formData, config)
             setUploading(false)
             toast.success('Image Uploaded!')
             // Ideally refetch product to get new image URL or just trust it.
@@ -66,7 +66,7 @@ const ProductEdit = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            await axios.put(`http://127.0.0.1:8000/api/products/update/${id}/`, {
+            await axiosInstance.put(`/api/products/update/${id}/`, {
                 name, price, image, brand, category, countInStock, description
             }, config)
             toast.success('Product updated successfully')

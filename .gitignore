@@ -10,6 +10,7 @@ media
 staticfiles/
 .env
 
+
 # Node
 node_modules/
 dist/

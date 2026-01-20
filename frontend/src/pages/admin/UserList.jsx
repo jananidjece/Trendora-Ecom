@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axiosInstance from '../../axiosInstance'
 import { useSelector } from 'react-redux'
 import { FaEdit, FaTrash, FaCheck, FaTimes } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
@@ -19,7 +19,7 @@ const UserList = () => {
 
     const fetchUsers = async () => {
         try {
-            const { data } = await axios.get('http://127.0.0.1:8000/api/users/', config)
+            const { data } = await axiosInstance.get('/api/users/', config)
             setUsers(data)
         } catch (error) {
             console.error(error)
@@ -33,7 +33,7 @@ const UserList = () => {
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this user?')) {
             try {
-                await axios.delete(`http://127.0.0.1:8000/api/users/delete/${id}/`, config)
+                await axiosInstance.delete(`/api/users/delete/${id}/`, config)
                 fetchUsers()
                 toast.success('User deleted successfully')
             } catch (error) {

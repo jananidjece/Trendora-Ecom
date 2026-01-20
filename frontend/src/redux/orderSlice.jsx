@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 
 // Async Thunks
 export const createOrder = createAsyncThunk(
@@ -17,8 +17,8 @@ export const createOrder = createAsyncThunk(
                 },
             };
 
-            const { data } = await axios.post(
-                `http://127.0.0.1:8000/api/orders/add/`,
+            const { data } = await axiosInstance.post(
+                `/api/orders/add/`,
                 order,
                 config
             );

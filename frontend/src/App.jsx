@@ -25,7 +25,7 @@ import UserEdit from "./pages/admin/UserEdit"
 import { useDispatch } from "react-redux"
 import { setProducts } from "./redux/productSlice"
 import { useEffect } from "react"
-import axios from "axios"
+import axiosInstance from "./axiosInstance"
 
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -37,7 +37,7 @@ function App() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/products/')
+        const response = await axiosInstance.get('/api/products/')
         dispatch(setProducts(response.data))
       } catch (error) {
         console.error("Error fetching products:", error)
