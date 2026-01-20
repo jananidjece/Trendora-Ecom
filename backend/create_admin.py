@@ -12,10 +12,13 @@ def create_superuser():
     username = 'admin'
     email = 'admin@example.com'
     password = 'password123'
-    
+
+    # Remove any existing users with the same email to prevent duplicates/errors
+    User.objects.filter(email=email).exclude(username=username).delete()
+
     user, created = User.objects.get_or_create(
-        email=email,
-        defaults={'username': username, 'is_staff': True, 'is_superuser': True}
+        username=username,
+        defaults={'email': email, 'is_staff': True, 'is_superuser': True}
     )
     
     if created:
@@ -23,8 +26,8 @@ def create_superuser():
         user.save()
         print(f"Superuser '{username}' created successfully.")
     else:
-        # Ensure it has the right username and password even if it existed with different ones
-        user.username = username
+        # Ensure it has the right email and password even if it existed
+        user.email = email
         user.set_password(password)
         user.is_staff = True
         user.is_superuser = True
