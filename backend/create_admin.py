@@ -16,11 +16,9 @@ def create_superuser():
     if not User.objects.filter(username=username).exists():
         print(f"Creating superuser '{username}'...")
         try:
-            User.objects.create_superuser(username, email, password)
+            User.objects.create_superuser(username=username, email=email, password=password)
             print(f"Superuser created successfully.")
-            print(f"Username: {username}")
-            print(f"Email: {email}")
-            print(f"Password: {password}")
+            print(f"Login details check: {username} / {email} / {password}")
         except Exception as e:
             print(f"Error creating superuser: {e}")
     else:
