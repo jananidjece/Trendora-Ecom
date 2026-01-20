@@ -13,16 +13,25 @@ def create_superuser():
     email = 'admin@example.com'
     password = 'password123'
     
-    if not User.objects.filter(username=username).exists():
-        print(f"Creating superuser '{username}'...")
-        try:
-            User.objects.create_superuser(username=username, email=email, password=password)
-            print(f"Superuser created successfully.")
-            print(f"Login details check: {username} / {email} / {password}")
-        except Exception as e:
-            print(f"Error creating superuser: {e}")
+    user, created = User.objects.get_or_create(
+        email=email,
+        defaults={'username': username, 'is_staff': True, 'is_superuser': True}
+    )
+    
+    if created:
+        user.set_password(password)
+        user.save()
+        print(f"Superuser '{username}' created successfully.")
     else:
-        print(f"Superuser '{username}' already exists.")
+        # Ensure it has the right username and password even if it existed with different ones
+        user.username = username
+        user.set_password(password)
+        user.is_staff = True
+        user.is_superuser = True
+        user.save()
+        print(f"Superuser '{username}' already existed, credentials reset.")
+    
+    print(f"Login details check: {username} / {email} / {password}")
 
 if __name__ == '__main__':
     create_superuser()
