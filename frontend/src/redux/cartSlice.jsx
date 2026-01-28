@@ -46,7 +46,7 @@ const cartSlice = createSlice({
           price: price,
           quantity: 1,
           totalPrice: price,
-          Image: newItem.image // Note: API might return 'image' (lowercase) or 'Image'. Check this.
+          Image: newItem.image 
         })
       }
       state.totalPrice += price;
