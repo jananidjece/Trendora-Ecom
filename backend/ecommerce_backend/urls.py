@@ -27,5 +27,8 @@ urlpatterns = [
     path('api/users/', include('users.urls')),
     path('api/products/', include('products.urls')),
     path('api/orders/', include('orders.urls')),
-    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
